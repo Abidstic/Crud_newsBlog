@@ -1,5 +1,5 @@
 const Sequelize=require('sequelize');
-const sequelize=new Sequelize('crud_newsBlog','root','1312752397',{
+const sequelize=new Sequelize('crud_newsBlog','root','',{
     dialect: "mysql",
     host:"localhost"
 });
