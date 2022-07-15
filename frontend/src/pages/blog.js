@@ -11,7 +11,7 @@ function Blog() {
                 <Menu />
             </div>
             <div className="App center">
-                <BlogCard blogId={id} showfull={true} />
+                <BlogCard newsID={id} showfull={true} />
             </div>
         </>
     );
