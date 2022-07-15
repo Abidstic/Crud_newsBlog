@@ -17,9 +17,17 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.20.1"
+    "sequelize": "^6.21.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
-  }
+    "nodemon": "^2.0.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abidstic101/Crud_newsBlog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Abidstic101/Crud_newsBlog/issues"
+  },
+  "homepage": "https://github.com/Abidstic101/Crud_newsBlog#readme"
 }

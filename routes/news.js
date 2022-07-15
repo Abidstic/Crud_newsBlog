@@ -9,13 +9,13 @@ router.get("/:newsID",newsController.getNewsById);
 router.get("/:newsUploader",newsController.getNewsByUser);
 router.post("/", checkAuthJwt,newsController.addNews);
 router.patch(
-    "/:newsEdit",
+    "/:news",
     checkAuthJwt,
     checkAuthUploader,
 newsController.EditNews
 );
 router.delete(
-    "/:newsDelete",
+    "/:news",
     checkAuthJwt,
     checkAuthUploader,
 newsController.deletenews

@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     const uploader = req.userId;
     Blog.findByPk(blogID)
         .then((blog) => {
-            if (blog.uploader !== author) {
+            if (blog.uploader !== uploader) {
                 return res.status(403).json({
                     message: "You are not Authorized to edit this blog",
                 });

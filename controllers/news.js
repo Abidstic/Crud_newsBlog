@@ -26,7 +26,7 @@ exports.getAllNews = async (req, res) => {
 };
 
 exports.getNewsById = async (req, res) => {
-    const id = req.params.blog;
+    const id = req.params.blogId;
     try {
         const blog = await Blog.findByPk(id);
         if (blog) {
@@ -62,7 +62,7 @@ exports.getNewsByUser = async (req, res) => {
     try {
         const blogs = await Blog.findAll({
             attributes: ["id"],
-            where: { user },
+            where: { uploader},
         });
         res.status(200).json(blogs);
     } catch (error) {
