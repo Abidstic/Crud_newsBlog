@@ -1,15 +1,20 @@
 const res = require("express/lib/response");
 const News = require("../Models/news");
 
+
 exports.addNews = async (req, res) => {
+    console.log("inside add news");
+
     try {
-        const news = await News.create({
-            title: req.body.title,
-            uploader: req.userId,
-            uploader_name: req.userName,
-            body: req.body.body,
-            uploaded_on: new Date().getTime(),
-        });
+        const client = {
+        title: req.body.title,
+        uploader: req.userID,
+        uploader_name: req.userName,
+        body: req.body.body,
+        uploaded_on: new Date().getTime(),
+    };
+    console.log(client);
+        const news = await News.create(client);
         res.status(201).json({ id: news.id });
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
@@ -26,11 +31,11 @@ exports.getAllNews = async (req, res) => {
 };
 
 exports.getNewsById = async (req, res) => {
-    const id = req.params.blogId;
+    const id = req.params.newsID;
     try {
-        const blog = await Blog.findByPk(id);
-        if (blog) {
-            res.status(200).json(blog);
+        const news = await News.findByPk(id);
+        if (news) {
+            res.status(200).json(news);
         } else {
             res.status(500).json({ message: "Internal Server Error" });
         }
@@ -40,9 +45,9 @@ exports.getNewsById = async (req, res) => {
 };
 
 exports.EditNews = async (req, res) => {
-    const id = req.params.blog;
+    const id = req.params.news;
     try {
-        await Blog.update(
+        await News.update(
             {
                 title: req.body.title,
                 body: req.body.body,
@@ -50,7 +55,7 @@ exports.EditNews = async (req, res) => {
             { where: { id } }
         );
         res.status(200).json({
-            message: "Blog Edited and updated successfully !!!",
+            message: "News Edited and updated successfully !!!",
         });
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
@@ -60,23 +65,23 @@ exports.EditNews = async (req, res) => {
 exports.getNewsByUser = async (req, res) => {
     const user = req.params.uploader;
     try {
-        const blogs = await Blog.findAll({
+        const news = await News.findAll({
             attributes: ["id"],
             where: { uploader},
         });
-        res.status(200).json(blogs);
+        res.status(200).json(news);
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
 exports.deletenews = async (req, res) => {
-    const id = req.params.blog;
+    const id = req.params.news;
     try {
-        await Blog.destroy({
+        await News.destroy({
             where: { id },
         });
-        res.status(204).json({ message: "Blog Deleted Successfully..." });
+        res.status(204).json({ message: "News Deleted Successfully..." });
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
     }

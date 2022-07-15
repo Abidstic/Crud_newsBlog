@@ -12,11 +12,11 @@ const News = sequelize.define("news", {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    posted_On: {
+    uploaded_on: {
         type: Sequelize.BIGINT,
         allowNull: false,
     },
-    updated_on: {
+    posted_on: {
         type: Sequelize.BIGINT,
         allowNull: true,
     },
@@ -28,7 +28,7 @@ const News = sequelize.define("news", {
             key: "id",
         },
     },
-    uploader_Name: {
+    uploader_name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
