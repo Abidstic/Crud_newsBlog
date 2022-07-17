@@ -1,4 +1,4 @@
 # Crud_newsBlog
-this is a Crud app backend made with nodejs, mysql.
-And Frontend is made with React.js
+this is a Crud app backend made with nodejs, mysql
+and Frontend is made with React.js
 
