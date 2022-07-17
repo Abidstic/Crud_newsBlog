@@ -17,7 +17,9 @@ const Menu = () => {
         });
         if ((await response.status) === 200) {
             setLoggedIn(true);
-            localStorage.setItem("userID", await response.json().userID);
+            const data = await response.json();
+
+            localStorage.setItem("userID", data.userID);
         } else {
             setLoggedIn(false);
             localStorage.removeItem("userID");

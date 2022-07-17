@@ -99,7 +99,6 @@ exports.updateUser = async (req, res) => {
         if (invalidEmail(req.body.email)) {
             res.status(400).json({ msg: "Invalid email" });
         } else {
-            
             await User.update(
                 {
                     name: req.body.name,
@@ -120,7 +119,7 @@ exports.authUser = (req, res) => {
     res.status(200).json({
         message: "You are authenticated",
         username: req.userName,
-        id: req.userId,
+        userID: req.userID,
     });
 };
 
@@ -129,6 +128,7 @@ exports.userNameAvailable = async (req, res) => {
         const user = await User.findOne({
             where: { username: req.body.username },
         });
+        console.log(user);
         if (user) {
             res.status(409).json({ msg: "Username already exists" });
         } else {

@@ -96,10 +96,10 @@ function BlogCard(prop) {
             <div className="card-header">
                 <h1>{blogTitle}</h1>
                 Posted by{" "}
-                <a href={`/profile/${blog.uploader}`}>
-                    {blog.uploader_name}
+                <a href={`/profile/${blog?.uploader}`}>
+                    {blog?.uploader_name}
                 </a>{" "}
-                on {new Date(blog.uploaded_On).toLocaleDateString()}
+                on {new Date(blog?.uploaded_On).toLocaleDateString()}
             </div>
             {prop.showFull ? (
                 <div className="card-body">
@@ -126,9 +126,9 @@ function BlogCard(prop) {
                         </button>
                         <EditBlog
                             trigger={editBlogMode}
-                            title={blog.title}
-                            body={blog.body}
-                            id={blog.id}
+                            title={blog?.title}
+                            body={blog?.body}
+                            id={blog?.id}
                             done={editDone}
                         >
                             <button onClick={() => setEditBlogMode(-1)}>

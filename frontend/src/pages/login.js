@@ -6,7 +6,8 @@ function Login() {
     const [password, setPassword] = useState("");
 
     async function loginUser(event) {
-        event.preventDefault();
+        console.log("loginUser");
+        // event.preventDefault();
         const response = await fetch("http://localhost:5000/user/login", {
             method: "POST",
             headers: {
@@ -18,28 +19,38 @@ function Login() {
             }),
         });
         const status = await response.status;
+        console.log(status);
         switch (status) {
             case 200:
                 const data = await response.json();
+                console.log(data);
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userID", data.id);
                 window.location.href = "/home";
                 break;
             case 401:
                 alert("Username or password is incorrect");
+                break;
+            default:
+                alert("Something went wrong");
+                break;
         }
     }
 
+    function changeName(e) {
+        setUsername(e.target.value);
+    }
     return (
-        <div class="App2 center">
+        <div className="App2 center">
             <div className="card2 center">
                 <h1>Login</h1>
                 <div className="login center2">
                     <div className="login_with_cred center">
                         <input
                             className="login_shape"
+                            name="username"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={changeName}
                             type="text"
                             placeholder="Username"
                         />
@@ -47,7 +58,7 @@ function Login() {
                             className="login_shape"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            type="text"
+                            type="password"
                             placeholder="Password"
                         />
                         <button className="login_shape" onClick={loginUser}>

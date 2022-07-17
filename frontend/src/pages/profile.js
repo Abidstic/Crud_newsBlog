@@ -19,9 +19,13 @@ const Profile = () => {
     const [blogs, setBlogs] = useState([]);
     async function getBlogs() {
         const response = await fetch(
-            "http://localhost:5000/news/" + owner,
+            "http://localhost:5000/news/owner/" + owner,
             {
                 method: "GET",
+                headers: {
+                    authorization: localStorage.getItem("token"),
+                    "Content-Type": "application/json",
+                },
             }
         );
         const data = await response.json();
@@ -40,6 +44,7 @@ const Profile = () => {
         switch (status) {
             case 200:
                 const data = await response.json();
+                console.log(data);
                 setProfile(data);
                 break;
             case 404:
@@ -77,10 +82,10 @@ const Profile = () => {
             <Menu />
             <div className="App center">
                 <div className="profile">
-                    <pre>Name : {profile.name}</pre>
-                    <pre>Username : {profile.username}</pre>
-                    <pre>Email : {profile.email}</pre>
-                    <pre>Blogs : {profile.news}</pre>
+                    <pre>Name : {profile?.name}</pre>
+                    <pre>Username : {profile?.username}</pre>
+                    <pre>Email : {profile?.email}</pre>
+                    <pre>Blogs : {profile?.news}</pre>
                     <div className="linear">
                         {isOwner ? (
                             <button
@@ -106,9 +111,10 @@ const Profile = () => {
                         </EditProfile>
                     </div>
                 </div>
-                {blogs.map((val) => {
-                    return <BlogCard blogId={val.id} showFull={false} />;
-                })}
+                {blogs &&
+                    blogs.map((val) => {
+                        return <BlogCard blogId={val.id} showFull={false} />;
+                    })}
             </div>
         </>
     );
